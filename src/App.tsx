@@ -22,7 +22,7 @@ interface Reply {
 }
 
 interface Comment {
-  id: number;
+  id: number | string;
   content: string;
   createdAt: string;
   replies: Reply[];
@@ -41,37 +41,52 @@ function App() {
   const [currentUser, setCurrentUser] = useState<User>(data.currentUser)
   
   const [replyProperties, setReplyProperties] = useState<ReplyProperties | null>(null)
-  const handleReply = (commentId: number, replyingTo: string) => {
-    setNewComment(`@${replyingTo}`)
+ 
+  const handleReply = (commentId: number | string, replyingTo: string) => {
+    setNewComment(`@${replyingTo} `)
     setReplyProperties({ id: commentId, replyingTo });
   };
 
   const handleSubmitReply = () =>{
 
-    const newId = v4()
+    if(replyProperties){
+      const newId = v4()
 
-    const newReply: Reply = {
-      id: newId,
-      content: newComment,
-      createdAt: 'just now',
-      replyingTo: `${replyProperties?.replyingTo}`,
-      score: 0,
-      user: currentUser
-    };
+      const newReply: Reply = {
+        id: newId,
+        content: newComment,
+        createdAt: 'just now',
+        replyingTo: `${replyProperties?.replyingTo}`,
+        score: 0,
+        user: currentUser
+      };
 
-    const updatedComments = comments.map((comment) => {
-      if (comment.id === replyProperties?.id) {
-        return {
-          ...comment,
-          replies: [...comment.replies, newReply],
-        };
+      const updatedComments = comments.map((comment) => {
+        if (comment.id === replyProperties?.id) {
+          return {
+            ...comment,
+            replies: [...comment.replies, newReply],
+          };
+        }
+        return comment;
+      });
+      setComments(updatedComments);
+      setNewComment('');
+    }else{
+      const newId = v4()
+
+      const newCommentToAdd: Comment = {
+        id: newId,
+        content: newComment,
+        createdAt: 'just now',
+        replies: [],
+        score: 0,
+        user: currentUser
       }
-      return comment;
-    });
-
-    setComments(updatedComments);
-    setNewComment('');
-    console.log(updatedComments)
+      
+      setComments((prevComments) => [...prevComments, newCommentToAdd])
+      setNewComment('')
+    }
   }
 
   const deleteComment = (commentId: number | string, replyId: number | string) =>{
@@ -93,6 +108,22 @@ function App() {
     <>
       <div className=' flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
         {comments.map((comment) => (
+          comment.user.username === 'juliusomo' ? 
+          <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
+              <div className=' flex gap-4 p-4'>
+                <img src={comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
+                <div>{comment.user.username}</div>
+                <div>{comment.createdAt}</div>
+              </div>
+                
+                <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
+                {/* <div>
+                  <div onClick={() => deleteComment(comment.id, reply.id)}>Delete</div>
+                  <div onClick={() => '' }>Edit</div>
+                </div> */}
+             </div> 
+          
+          :
           <div key={comment.id} className='flex flex-col gap-4 items-center'>
             
             <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
