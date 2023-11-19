@@ -89,7 +89,7 @@ function App() {
     }
   }
 
-  const deleteComment = (commentId: number | string, replyId: number | string) =>{
+  const deleteReply = (commentId: number | string, replyId: number | string) =>{
     const updatedComments = comments.map((comment)=>{
       if(comment.id === commentId){
         return{
@@ -100,6 +100,11 @@ function App() {
       return comment
     })
 
+    setComments(updatedComments)
+  }
+
+  const deleteComment = (commentId: string | number) =>{
+    const updatedComments = comments.filter((comment)=>comment.id !== commentId)
     setComments(updatedComments)
   }
 
@@ -117,10 +122,10 @@ function App() {
               </div>
                 
                 <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-                {/* <div>
-                  <div onClick={() => deleteComment(comment.id, reply.id)}>Delete</div>
+                <div>
+                  <div onClick={() => deleteComment(comment.id)}>Delete</div>
                   <div onClick={() => '' }>Edit</div>
-                </div> */}
+                </div>
              </div> 
           
           :
@@ -153,7 +158,7 @@ function App() {
                 <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div>
 
                 <div>
-                  <div onClick={() => deleteComment(comment.id, reply.id)}>Delete</div>
+                  <div onClick={() => deleteReply(comment.id, reply.id)}>Delete</div>
                   <div onClick={() => '' }>Edit</div>
                 </div>
               </div>
