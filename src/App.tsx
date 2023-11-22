@@ -3,8 +3,10 @@ import { useState } from 'react';
 import data from './data.json';
 
 import { v4 as uuidv4, v4 } from 'uuid'
+import { Comment } from './components/Comment';
+import { Replies } from './components/Replies';
 
-interface User{
+export interface User{
   username: string
   image: {
     png: string,
@@ -12,7 +14,7 @@ interface User{
   }
 }
 
-interface Reply {
+export interface Reply {
   id: number | string ;
   content: string;
   createdAt: string;
@@ -48,7 +50,6 @@ function App() {
   };
 
   const handleSubmitReply = () =>{
-
     if(replyProperties){
       const newId = v4()
 
@@ -111,67 +112,13 @@ function App() {
 
   return (
     <>
-      <div className=' flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
+      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
         {comments.map((comment) => (
-          comment.user.username === 'juliusomo' ? 
-          <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
-              <div className=' flex gap-4 p-4'>
-                <img src={comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
-                <div>{comment.user.username}</div>
-                <div>{comment.createdAt}</div>
-              </div>
-                
-                <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-                <div>
-                  <div onClick={() => deleteComment(comment.id)}>Delete</div>
-                  <div onClick={() => '' }>Edit</div>
-                </div>
-             </div> 
-          
-          :
-          <div key={comment.id} className='flex flex-col gap-4 items-center'>
+          <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
+            <Comment comment={comment} onReply={handleReply} onDelete={deleteComment} />
             
-            <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
-              <div className=' flex gap-4 p-4'>
-                <img src={comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
-                <div>{comment.user.username}</div>
-                <div>{comment.createdAt}</div>
-              </div>
-                
-                <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-                <div 
-                  onClick={() => 
-                    handleReply(comment.id, comment.user.username)}
-                  className=' cursor-pointer text-base text-[#5357B6] font-medium'
-                  >Reply</div>
-             </div>
-
-            {comment.replies.map((reply) => (
-              reply.user.username === 'juliusomo' ?
-                <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
-                <div className='flex gap-4 p-4'>
-                  <img src={reply.user.image.webp} alt="userImg" className=' w-[32px] h-[32px]'/>
-                  <div>{reply.user.username}</div>
-                  <div>{reply.createdAt}</div>
-                </div>
-  
-                <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div>
-
-                <div>
-                  <div onClick={() => deleteReply(comment.id, reply.id)}>Delete</div>
-                  <div onClick={() => '' }>Edit</div>
-                </div>
-              </div>
-               : 
-              <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
-                <div className='flex gap-4 p-4'>
-                  <img src={reply.user.image.webp} alt="userImg" className=' w-[32px] h-[32px]'/>
-                  <div>{reply.user.username}</div>
-                  <div>{reply.createdAt}</div>
-                </div>
-                
-                <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div>
-              </div>
+            {comment.replies.map((reply)=>(
+              <Replies key={reply.id} reply={reply} onDelete={deleteReply} commentId={comment.id} />
             ))}
           </div>
         ))}
