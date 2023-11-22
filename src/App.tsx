@@ -23,7 +23,7 @@ export interface Reply {
   user: User;
 }
 
-interface Comment {
+export interface CommentInterFace {
   id: number | string;
   content: string;
   createdAt: string;
@@ -32,22 +32,17 @@ interface Comment {
   user: User;
 }
 
-interface ReplyProperties{
+export interface ReplyProperties{
   id: number | string ,
   replyingTo: string;
 }
 
 function App() {
-  const [comments, setComments] = useState<Comment[]>(data.comments);
+  const [comments, setComments] = useState<CommentInterFace[]>(data.comments);
   const [newComment, setNewComment] = useState<string>('');
   const [currentUser, setCurrentUser] = useState<User>(data.currentUser)
   
   const [replyProperties, setReplyProperties] = useState<ReplyProperties | null>(null)
- 
-  const handleReply = (commentId: number | string, replyingTo: string) => {
-    setNewComment(`@${replyingTo} `)
-    setReplyProperties({ id: commentId, replyingTo });
-  };
 
   const handleSubmitReply = () =>{
     if(replyProperties){
@@ -76,7 +71,7 @@ function App() {
     }else{
       const newId = v4()
 
-      const newCommentToAdd: Comment = {
+      const newCommentToAdd: CommentInterFace = {
         id: newId,
         content: newComment,
         createdAt: 'just now',
@@ -109,13 +104,27 @@ function App() {
     setComments(updatedComments)
   }
 
+  const handleUpdate = (commentId: number | string, updatedComment: string) =>{
+    setComments((prevComments)=>
+      prevComments.map((comment)=>
+        comment.id === commentId ? {...comment, content: updatedComment} : comment
+      )
+    )
+
+  }
 
   return (
     <>
       <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
         {comments.map((comment) => (
           <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
-            <Comment comment={comment} onReply={handleReply} onDelete={deleteComment} />
+            <Comment 
+            comment={comment} 
+            onDelete={deleteComment} 
+            onUpdate={handleUpdate}
+            setNewComment={setNewComment}
+            setReplyProperties={setReplyProperties}
+            />
             
             {comment.replies.map((reply)=>(
               <Replies key={reply.id} reply={reply} onDelete={deleteReply} commentId={comment.id} />

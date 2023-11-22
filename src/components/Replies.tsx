@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Reply } from '../App'
 
 interface ReplyProps{

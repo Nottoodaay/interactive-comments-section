@@ -1,7 +1,7 @@
 import React from 'react'
+import { useState } from 'react';
 
-import { Reply } from '../App';
-import { User } from '../App';
+import { Reply, User, ReplyProperties } from '../App';
 
 interface CommentProps {
     comment:{ 
@@ -12,11 +12,28 @@ interface CommentProps {
         score: number;
         user: User;
     },
-    onReply: (commentId: number | string, replyingTo: string) => void;
     onDelete: (commentId: number | string) => void;
+    setNewComment: (value: string) => void,
+    setReplyProperties: React.Dispatch<React.SetStateAction<ReplyProperties | null>>,
+    onUpdate: (commentId: number | string, updatedComment: string) => void
 }
 
-export const Comment: React.FC<CommentProps> = ({comment, onReply, onDelete}) => {
+
+export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewComment, setReplyProperties, onUpdate }) => {
+
+  const [edit, setEdit] = useState<boolean>(false)
+  const [textAfterEdit, setTextAfterEdit] = useState<string>(comment.content)
+
+  const handleReply = (commentId: number | string, replyingTo: string) => {
+    setNewComment(`@${replyingTo} `)
+    setReplyProperties({id: commentId, replyingTo: replyingTo})
+  };
+
+  const handleUpdate = () =>{
+    onUpdate(comment.id, textAfterEdit)
+    setEdit(false)
+  }
+  
   return (
     comment.user.username === 'juliusomo' ? 
         <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
@@ -25,11 +42,25 @@ export const Comment: React.FC<CommentProps> = ({comment, onReply, onDelete}) =>
             <div>{comment.user.username}</div>
             <div>{comment.createdAt}</div>
             </div>
+            {edit ? 
+            <>
+              <textarea rows={4} cols={50} 
+              value={textAfterEdit}
+              onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
+              
+              <button className=' w-[104px] h-[48px] 
+              bg-[#5357B6] items-center 
+              font-medium text-base text-[#ffffff] rounded'
+              onClick={()=>handleUpdate()}
+              >UPDATE</button>
+            </>
+
+            :  
             <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-            
+            }
             <div>
                 <div onClick={() => onDelete(comment.id)}>Delete</div>
-                <div onClick={() => '' }>Edit</div>
+                <div onClick={() => setEdit(!edit) }>Edit</div>
             </div>
         </div> 
        : 
@@ -44,7 +75,7 @@ export const Comment: React.FC<CommentProps> = ({comment, onReply, onDelete}) =>
                 <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
                 <div 
                   onClick={() => 
-                  onReply(comment.id, comment.user.username)}
+                  handleReply(comment.id, comment.user.username)}
                   className=' cursor-pointer text-base text-[#5357B6] font-medium'
                   >Reply</div>
              </div>
