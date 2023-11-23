@@ -113,6 +113,17 @@ function App() {
 
   }
 
+  const handleReplyUpdate = (replyId: number | string, updatedReply: string) =>{
+    setComments((prevComments)=>
+      prevComments.map((comment)=>({
+        ...comment,
+        replies: comment.replies.map((reply)=>
+          reply.id === replyId ? {...reply, content: updatedReply} : reply
+        )
+      }))
+      )
+  }
+
   return (
     <>
       <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
@@ -127,7 +138,13 @@ function App() {
             />
             
             {comment.replies.map((reply)=>(
-              <Replies key={reply.id} reply={reply} onDelete={deleteReply} commentId={comment.id} />
+              <Replies 
+              key={reply.id} 
+              reply={reply} 
+              onDelete={deleteReply} 
+              commentId={comment.id} 
+              onUpdate={handleReplyUpdate}
+              />
             ))}
           </div>
         ))}

@@ -1,13 +1,21 @@
 import { Reply } from '../App'
+import { useState } from 'react';
 
 interface ReplyProps{
     reply: Reply
     onDelete: (commentId: number | string, replyId: number | string) => void;
-
-    commentId: number | string
+    commentId: number | string,
+    onUpdate: (replyId: number | string, updatedReply: string) => void
 }
 
-export const Replies = ({reply, onDelete, commentId}:ReplyProps) => {
+export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
+    const [edit, setEdit] = useState<boolean>(false)
+    const [replyText, setReplyText] = useState<string>(reply.content)
+
+    const handleUpdate = () =>{
+        onUpdate(reply.id, replyText)
+        setEdit(!edit)
+    }
   return (
     <div>
          {
@@ -19,11 +27,28 @@ export const Replies = ({reply, onDelete, commentId}:ReplyProps) => {
                     <div>{reply.createdAt}</div>
                 </div>
 
-                <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div>
+                {edit ?
+                    <>
+                        <textarea rows={4} cols={50}
+                        value={replyText} 
+                        onChange={(e)=>setReplyText(e.target.value)}
+                         >{reply.content}</textarea>
+                        
+                        <button className=' w-[104px] h-[48px] 
+                        bg-[#5357B6] items-center 
+                        font-medium text-base text-[#ffffff] rounded'
+                        onClick={handleUpdate}
+                        >UPDATE</button>
+                    </> 
+                    : 
+                    <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div> 
+                }
+
+                
 
                 <div>
                     <div onClick={() => onDelete(commentId, reply.id)}>Delete</div>
-                    <div onClick={() => '' }>Edit</div>
+                    <div onClick={() => setEdit(!edit) }>Edit</div>
                 </div>
                 </div>
             : 
