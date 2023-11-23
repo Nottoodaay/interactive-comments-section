@@ -40,7 +40,6 @@ export interface ReplyProperties{
 function App() {
   const [comments, setComments] = useState<CommentInterFace[]>(data.comments);
   const [newComment, setNewComment] = useState<string>('');
-  const [currentUser, setCurrentUser] = useState<User>(data.currentUser)
   
   const [replyProperties, setReplyProperties] = useState<ReplyProperties | null>(null)
 
@@ -54,7 +53,7 @@ function App() {
         createdAt: 'just now',
         replyingTo: `${replyProperties?.replyingTo}`,
         score: 0,
-        user: currentUser
+        user: data.currentUser
       };
 
       const updatedComments = comments.map((comment) => {
@@ -77,7 +76,7 @@ function App() {
         createdAt: 'just now',
         replies: [],
         score: 0,
-        user: currentUser
+        user: data.currentUser
       }
       
       setComments((prevComments) => [...prevComments, newCommentToAdd])
