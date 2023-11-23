@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import data from './data.json';
 
-import { v4 as uuidv4, v4 } from 'uuid'
+import { v4 } from 'uuid'
 import { Comment } from './components/Comment';
 import { Replies } from './components/Replies';
 
