@@ -38,7 +38,7 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
     comment.user.username === 'juliusomo' ? 
         <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
             <div className=' flex gap-4 p-4'>
-            <img src={comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
+            <img src={process.env.PUBLIC_URl + comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
             <div>{comment.user.username}</div>
             <div>{comment.createdAt}</div>
             </div>
