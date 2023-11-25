@@ -6,6 +6,7 @@ import { Reply, User, ReplyProperties } from '../App';
 import imageAmrobson from '../../public/images/avatars/image-amyrobson.webp'
 import imageJuiliusomo from '../../public/images/avatars/image-juliusomo.webp'
 import imageMaxblagun from '../../public/images/avatars/image-maxblagun.webp'
+import { NumberComponent } from './NumberComponent';
 
 
 interface CommentProps {
@@ -92,12 +93,15 @@ export const Comment: React.FC<CommentProps> = ({
                 <div>{comment.createdAt}</div>
               </div>
                 
-                <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-                <div 
+                <div className=' text-base text-[#67727E] p-3'>{comment.content}</div>
+                <div className=' flex justify-between ml-4 mr-4'>
+                  <NumberComponent/>
+                  <div 
                   onClick={() => 
                   handleReply(comment.id, comment.user.username)}
                   className=' cursor-pointer text-base text-[#5357B6] font-medium'
                   >Reply</div>
+                </div>
              </div>
         </div>
   )

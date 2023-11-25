@@ -183,7 +183,8 @@ function App() {
         
 
           <div className=' w-[344px] h-[182px] flex flex-col bg-[#FFFFFF] items-center justify-center'>
-            <input type="text" placeholder='Add a comment...' 
+            <textarea
+             placeholder='Add a comment...' 
               onChange={(e) => setNewComment(e.target.value)} 
               value={newComment} 
               className=' w-[310px] h-[96px] border-solid-[#E9EBF0] border-[1px]'
