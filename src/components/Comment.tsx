@@ -17,14 +17,22 @@ interface CommentProps {
         score: number;
         user: User;
     },
-    onDelete: (commentId: number | string) => void;
     setNewComment: (value: string) => void,
     setReplyProperties: React.Dispatch<React.SetStateAction<ReplyProperties | null>>,
-    onUpdate: (commentId: number | string, updatedComment: string) => void
+    onUpdate: (commentId: number | string, updatedComment: string) => void,
+    setDeleteCheck: (value: boolean) => void,
+    setDeleteCommentId: (value: string | number) => void
 }
 
 
-export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewComment, setReplyProperties, onUpdate }) => {
+export const Comment: React.FC<CommentProps> = ({
+  comment, 
+  setNewComment, 
+  setReplyProperties, 
+  onUpdate,
+  setDeleteCheck,
+  setDeleteCommentId
+}) => {
 
   const [edit, setEdit] = useState<boolean>(false)
   const [textAfterEdit, setTextAfterEdit] = useState<string>(comment.content)
@@ -39,6 +47,11 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
   const handleUpdate = () =>{
     onUpdate(comment.id, textAfterEdit)
     setEdit(false)
+  }
+
+  const handleDelete = (id: number | string) =>{
+    setDeleteCheck(true)
+    setDeleteCommentId(id)
   }
   
   return (
@@ -66,7 +79,7 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
             <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
             }
             <div>
-                <div onClick={() => onDelete(comment.id)}>Delete</div>
+                <div onClick={()=>handleDelete(comment.id)}>Delete</div>
                 <div onClick={() => setEdit(!edit) }>Edit</div>
             </div>
         </div> 

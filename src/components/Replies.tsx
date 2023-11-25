@@ -8,10 +8,22 @@ interface ReplyProps{
     reply: Reply
     onDelete: (commentId: number | string, replyId: number | string) => void;
     commentId: number | string,
-    onUpdate: (replyId: number | string, updatedReply: string) => void
+    onUpdate: (replyId: number | string, updatedReply: string) => void,
+    setDeleteReplyCheck: (value: boolean) => void,
+    setDeleteCommentId: (value: string | number) => void,
+    setDeleteReplyId: (value: string | number) => void
 }
 
-export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
+export const Replies = ({
+    reply, 
+    onDelete, 
+    commentId, 
+    onUpdate, 
+    setDeleteReplyCheck,
+    setDeleteCommentId,
+    setDeleteReplyId
+}:ReplyProps) => {
+
     const [edit, setEdit] = useState<boolean>(false)
     const [replyText, setReplyText] = useState<string>(reply.content)
 
@@ -19,6 +31,13 @@ export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
         onUpdate(reply.id, replyText)
         setEdit(!edit)
     }
+
+    const handleDeleteReply = (id: string | number) =>{
+        setDeleteReplyCheck(true)
+        setDeleteCommentId(commentId)
+        setDeleteReplyId(id)
+    }
+
   return (
     <div>
          {
@@ -48,7 +67,7 @@ export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
                 }
 
                 <div>
-                    <div onClick={() => onDelete(commentId, reply.id)}>Delete</div>
+                    <div onClick={() => handleDeleteReply(reply.id)}>Delete</div>
                     <div onClick={() => setEdit(!edit) }>Edit</div>
                 </div>
                 </div>
