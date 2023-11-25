@@ -5,8 +5,7 @@ import imageRamsesmiron from '../../public/images/avatars/image-ramsesmiron.webp
 import imageJuiliusomo from '../../public/images/avatars/image-juliusomo.webp'
 
 interface ReplyProps{
-    reply: Reply
-    onDelete: (commentId: number | string, replyId: number | string) => void;
+    reply: Reply,
     commentId: number | string,
     onUpdate: (replyId: number | string, updatedReply: string) => void,
     setDeleteReplyCheck: (value: boolean) => void,
@@ -15,8 +14,7 @@ interface ReplyProps{
 }
 
 export const Replies = ({
-    reply, 
-    onDelete, 
+    reply,  
     commentId, 
     onUpdate, 
     setDeleteReplyCheck,
