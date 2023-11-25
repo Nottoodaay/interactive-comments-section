@@ -149,7 +149,6 @@ function App() {
               <Replies 
               key={reply.id} 
               reply={reply} 
-              onDelete={deleteReply} 
               commentId={comment.id} 
               onUpdate={handleReplyUpdate}
               setDeleteReplyCheck={setDeleteReplyCheck}
