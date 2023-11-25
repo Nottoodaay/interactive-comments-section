@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export const NumberComponent = () => {
     const [startingNumber, setStarringNumber] = useState<number>(5)
