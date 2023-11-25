@@ -3,6 +3,11 @@ import { useState } from 'react';
 
 import { Reply, User, ReplyProperties } from '../App';
 
+import imageAmrobson from '../../public/images/avatars/image-amyrobson.webp'
+import imageJuiliusomo from '../../public/images/avatars/image-juliusomo.webp'
+import imageMaxblagun from '../../public/images/avatars/image-maxblagun.webp'
+
+
 interface CommentProps {
     comment:{ 
         id: number | string;
@@ -24,6 +29,8 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
   const [edit, setEdit] = useState<boolean>(false)
   const [textAfterEdit, setTextAfterEdit] = useState<string>(comment.content)
 
+  const images = [imageJuiliusomo ,imageAmrobson, imageMaxblagun]
+
   const handleReply = (commentId: number | string, replyingTo: string) => {
     setNewComment(`@${replyingTo} `)
     setReplyProperties({id: commentId, replyingTo: replyingTo})
@@ -38,7 +45,7 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
     comment.user.username === 'juliusomo' ? 
         <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
             <div className=' flex gap-4 p-4'>
-            <img src={process.env.PUBLIC_URl + comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
+            <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
             <div>{comment.user.username}</div>
             <div>{comment.createdAt}</div>
             </div>
@@ -67,7 +74,7 @@ export const Comment: React.FC<CommentProps> = ({comment, onDelete, setNewCommen
        <div className='flex flex-col gap-4 items-center'>
             <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
               <div className=' flex gap-4 p-4'>
-                <img src={comment.user.image.webp} className=' w-[32px] h-[32px]' alt="UserImg" />
+                <img src={typeof comment.id === 'number' ? images[comment.id] : ''} className=' w-[32px] h-[32px]' alt="UserImg" />
                 <div>{comment.user.username}</div>
                 <div>{comment.createdAt}</div>
               </div>

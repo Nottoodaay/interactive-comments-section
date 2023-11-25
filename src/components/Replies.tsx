@@ -1,6 +1,9 @@
 import { Reply } from '../App'
 import { useState } from 'react';
 
+import imageRamsesmiron from '../../public/images/avatars/image-ramsesmiron.webp'
+import imageJuiliusomo from '../../public/images/avatars/image-juliusomo.webp'
+
 interface ReplyProps{
     reply: Reply
     onDelete: (commentId: number | string, replyId: number | string) => void;
@@ -22,7 +25,7 @@ export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
         reply.user.username === 'juliusomo' ?
                 <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
                 <div className='flex gap-4 p-4'>
-                    <img src={reply.user.image.webp} alt="userImg" className=' w-[32px] h-[32px]'/>
+                    <img src={imageJuiliusomo} alt="userImg" className=' w-[32px] h-[32px]'/>
                     <div>{reply.user.username}</div>
                     <div>{reply.createdAt}</div>
                 </div>
@@ -44,8 +47,6 @@ export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
                     <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div> 
                 }
 
-                
-
                 <div>
                     <div onClick={() => onDelete(commentId, reply.id)}>Delete</div>
                     <div onClick={() => setEdit(!edit) }>Edit</div>
@@ -54,7 +55,7 @@ export const Replies = ({reply, onDelete, commentId, onUpdate}:ReplyProps) => {
             : 
                 <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
                 <div className='flex gap-4 p-4'>
-                    <img src={reply.user.image.webp} alt="userImg" className=' w-[32px] h-[32px]'/>
+                    <img src={imageRamsesmiron} alt="userImg" className=' w-[32px] h-[32px]'/>
                     <div>{reply.user.username}</div>
                     <div>{reply.createdAt}</div>
                 </div>
