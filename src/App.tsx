@@ -42,6 +42,7 @@ export interface ReplyProperties{
 function App() {
   const [comments, setComments] = useState<CommentInterFace[]>(data.comments);
   const [newComment, setNewComment] = useState<string>('');
+  const [newReplyToAdd, setNewReplyToAdd] = useState<string>('')
 
   const [deleteCheck, setDeleteCheck] = useState<boolean>(false)
   const [deleteReplyCheck, setDeleteReplyCheck] = useState<boolean>(false)
@@ -51,31 +52,7 @@ function App() {
   
   const [replyProperties, setReplyProperties] = useState<ReplyProperties | null>(null)
 
-  const handleSubmitReply = () =>{
-    if(replyProperties){
-      const newId = v4()
-
-      const newReply: Reply = {
-        id: newId,
-        content: newComment,
-        createdAt: 'just now',
-        replyingTo: `${replyProperties?.replyingTo}`,
-        score: 0,
-        user: data.currentUser
-      };
-
-      const updatedComments = comments.map((comment) => {
-        if (comment.id === replyProperties?.id) {
-          return {
-            ...comment,
-            replies: [...comment.replies, newReply],
-          };
-        }
-        return comment;
-      });
-      setComments(updatedComments);
-      setNewComment('');
-    }else{
+  const addNewComment = () =>{
       const newId = v4()
 
       const newCommentToAdd: CommentInterFace = {
@@ -89,7 +66,31 @@ function App() {
       
       setComments((prevComments) => [...prevComments, newCommentToAdd])
       setNewComment('')
-    }
+  }
+
+  const addNewReply = () =>{
+    const newId = v4()
+
+    const newReply: Reply = {
+      id: newId,
+      content: newReplyToAdd,
+      createdAt: 'just now',
+      replyingTo: `${replyProperties?.replyingTo}`,
+      score: 0,
+      user: data.currentUser
+    };
+
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === replyProperties?.id) {
+        return {
+          ...comment,
+          replies: [...comment.replies, newReply],
+        };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+    setNewComment('');
   }
 
   const deleteReply = (commentId: number | string, replyId: number | string) =>{
@@ -138,11 +139,13 @@ function App() {
           <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
             <Comment 
             comment={comment} 
+            newComment={newReplyToAdd}
             onUpdate={handleUpdate}
-            setNewComment={setNewComment}
+            setNewReply={setNewReplyToAdd}
             setReplyProperties={setReplyProperties}
             setDeleteCheck={setDeleteCheck}
             setDeleteCommentId={setDeleteCommentId}
+            addNewReply={addNewReply}
             />
             
             {comment.replies.map((reply)=>(
@@ -190,7 +193,7 @@ function App() {
               />
 
             <button 
-            onClick={()=>handleSubmitReply()}
+            onClick={addNewComment}
             className=' w-[104px] h-[48px] bg-[#5357B6] rounded text-base font-medium text-[#FFFFFF]'
             >Send</button>
           </div>

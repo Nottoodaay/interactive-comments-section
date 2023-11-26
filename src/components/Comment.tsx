@@ -7,6 +7,7 @@ import imageAmrobson from '../../public/images/avatars/image-amyrobson.webp'
 import imageJuiliusomo from '../../public/images/avatars/image-juliusomo.webp'
 import imageMaxblagun from '../../public/images/avatars/image-maxblagun.webp'
 import { NumberComponent } from './NumberComponent';
+import { ReplyTextArea } from './ReplyTextArea';
 
 
 interface CommentProps {
@@ -18,30 +19,38 @@ interface CommentProps {
         score: number;
         user: User;
     },
-    setNewComment: (value: string) => void,
+    newComment: string,
+    setNewReply: (value: string) => void,
     setReplyProperties: React.Dispatch<React.SetStateAction<ReplyProperties | null>>,
     onUpdate: (commentId: number | string, updatedComment: string) => void,
     setDeleteCheck: (value: boolean) => void,
-    setDeleteCommentId: (value: string | number) => void
+    setDeleteCommentId: (value: string | number) => void,
+    addNewReply: () => void
 }
 
 
 export const Comment: React.FC<CommentProps> = ({
-  comment, 
-  setNewComment, 
+  comment,
+  newComment, 
+  setNewReply, 
   setReplyProperties, 
   onUpdate,
   setDeleteCheck,
-  setDeleteCommentId
+  setDeleteCommentId,
+  addNewReply
 }) => {
 
   const [edit, setEdit] = useState<boolean>(false)
   const [textAfterEdit, setTextAfterEdit] = useState<string>(comment.content)
+  
+  const [isReply, setIsReply] = useState<boolean>(false)
+
 
   const images = [imageJuiliusomo ,imageAmrobson, imageMaxblagun]
 
   const handleReply = (commentId: number | string, replyingTo: string) => {
-    setNewComment(`@${replyingTo} `)
+    setIsReply(!isReply)
+    setNewReply(`@${replyingTo} `)
     setReplyProperties({id: commentId, replyingTo: replyingTo})
   };
 
@@ -80,7 +89,7 @@ export const Comment: React.FC<CommentProps> = ({
             <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
             }
             <div>
-                <div onClick={()=>handleDelete(comment.id)}>Delete</div>
+                <div onClick={()=> handleDelete(comment.id)}>Delete</div>
                 <div onClick={() => setEdit(!edit) }>Edit</div>
             </div>
         </div> 
@@ -103,6 +112,14 @@ export const Comment: React.FC<CommentProps> = ({
                   >Reply</div>
                 </div>
              </div>
+             
+             {isReply? 
+             <ReplyTextArea 
+             setIsReply={setIsReply} 
+             newReply={newComment}
+             setNewReply={setNewReply}
+             addNewReply={addNewReply}
+             /> : <div className='hiden' ></div>}
         </div>
   )
 }

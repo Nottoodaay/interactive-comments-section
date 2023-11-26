@@ -24,7 +24,6 @@ export const Replies = ({
 
     const [edit, setEdit] = useState<boolean>(false)
     const [replyText, setReplyText] = useState<string>(reply.content)
-
     const handleUpdate = () =>{
         onUpdate(reply.id, replyText)
         setEdit(!edit)
