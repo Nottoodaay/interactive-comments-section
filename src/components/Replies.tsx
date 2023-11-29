@@ -39,7 +39,7 @@ export const Replies = ({
     <div>
          {
         reply.user.username === 'juliusomo' ?
-                <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF] p-4' >
+                <div key={reply.id} className=' lg:hidden w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF] p-4' >
                 <div className='flex gap-4'>
                     <img src={imageJuiliusomo} alt="userImg" className=' w-[32px] h-[32px]'/>
                     <div>{reply.user.username}</div>
@@ -67,7 +67,7 @@ export const Replies = ({
                         >UPDATE</button>
                     </> 
                     : 
-                    <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div> 
+                    <div className=' p-4'>{`${reply.content}`}</div> 
                 }
 
                 <div className=' flex gap-4'>
@@ -78,9 +78,9 @@ export const Replies = ({
                     className=' text-[#5357B6] font-medium text-base cursor-pointer' 
                     onClick={() => setEdit(!edit) }>Edit</div>
                 </div>
-                </div>
+            </div>
             : 
-                <div key={reply.id} className=' w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
+                <div key={reply.id} className=' lg:hidden w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
                 <div className='flex gap-4 p-4'>
                     <img src={imageRamsesmiron} alt="userImg" className=' w-[32px] h-[32px]'/>
                     <div>{reply.user.username}</div>

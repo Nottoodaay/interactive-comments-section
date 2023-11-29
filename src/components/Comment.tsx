@@ -66,7 +66,7 @@ export const Comment: React.FC<CommentProps> = ({
   
   return (
     comment.user.username === 'juliusomo' ? 
-        <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
+        <div className=' lg:hidden w-[344px] h-[256px]  bg-[#FFFFFF]' >
             <div className=' flex gap-4 p-4'>
             <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
             <div>{comment.user.username}</div>
@@ -88,16 +88,28 @@ export const Comment: React.FC<CommentProps> = ({
             :  
             <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
             }
-            <div>
-                <div onClick={()=> handleDelete(comment.id)}>Delete</div>
-                <div onClick={() => setEdit(!edit) }>Edit</div>
+            
+            <div className=' flex justify-between ml-4 mr-4'>
+              <NumberComponent/>
+              <div className=' flex gap-4'>
+                  <div
+                    className=' text-[#ED6368] font-medium text-base cursor-pointer'  
+                    onClick={()=> handleDelete(comment.id)}
+                    >Delete</div>
+                  <div
+                  onClick={() => setEdit(!edit)}
+                  className=' text-[#5357B6] font-medium text-base cursor-pointer' 
+                  >Edit</div>
+              </div>
             </div>
+            
         </div> 
        : 
-       <div className='flex flex-col gap-4 items-center'>
-            <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]' >
+       <div className=' lg:hidden gap-4 items-center'>
+            <div className=' w-[344px] h-[256px] flex flex-col bg-[#FFFFFF]'>
               <div className=' flex gap-4 p-4'>
-                <img src={typeof comment.id === 'number' ? images[comment.id] : ''} className=' w-[32px] h-[32px]' alt="UserImg" />
+                <img src={typeof comment.id === 'number' ? images[comment.id] : ''} 
+                className=' w-[32px] h-[32px]' alt="UserImg" />
                 <div>{comment.user.username}</div>
                 <div>{comment.createdAt}</div>
               </div>
@@ -115,10 +127,10 @@ export const Comment: React.FC<CommentProps> = ({
              
              {isReply? 
              <ReplyTextArea 
-             setIsReply={setIsReply} 
-             newReply={newComment}
-             setNewReply={setNewReply}
-             addNewReply={addNewReply}
+              setIsReply={setIsReply} 
+              newReply={newComment}
+              setNewReply={setNewReply}
+              addNewReply={addNewReply}
              /> : <div className='hiden' ></div>}
         </div>
   )

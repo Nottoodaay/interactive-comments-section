@@ -7,6 +7,10 @@ import { Comment } from './components/Comment';
 import { Replies } from './components/Replies';
 import { Delete } from './components/Delete';
 import { DeleteReply } from './components/DeleteReply';
+import { DesktopComment } from './components/desktopResponsive/DesktopComment';
+import { DesktopReplies } from './components/desktopResponsive/DesktopReply';
+
+import imageJuiliusomo from '../public/images/avatars/image-juliusomo.webp'
 
 export interface User{
   username: string
@@ -134,7 +138,7 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative'>
+      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative pt-[64px] pb-[64px]'>
         {comments.map((comment) => (
           <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
             <Comment 
@@ -147,20 +151,53 @@ function App() {
             setDeleteCommentId={setDeleteCommentId}
             addNewReply={addNewReply}
             />
+
+            {/* comments for desktopResponsive */}
+
+            <DesktopComment
+            comment={comment}
+            newComment={newComment}
+            addNewReply={addNewReply}
+            setNewReply={setNewReplyToAdd}
+            setReplyProperties={setReplyProperties} 
+            onUpdate={handleUpdate}
+            setDeleteCheck={setDeleteCheck}
+            setDeleteCommentId={setDeleteCommentId}
+            />
             
-            {comment.replies.map((reply)=>(
-              <Replies 
-              key={reply.id} 
-              reply={reply} 
-              commentId={comment.id} 
-              onUpdate={handleReplyUpdate}
-              setDeleteReplyCheck={setDeleteReplyCheck}
-              setDeleteCommentId={setDeleteCommentId}
-              setDeleteReplyId={setDeleteReplyId}
-              />
-            ))}
+            <div className=' flex gap-[44px]'>
+              <div className=' w-[2px] bg-[#E9EBF0]'></div>
+              <div className=' flex flex-col gap-4'>
+                {comment.replies.map((reply)=>(
+                  <Replies 
+                  key={reply.id} 
+                  reply={reply} 
+                  commentId={comment.id} 
+                  onUpdate={handleReplyUpdate}
+                  setDeleteReplyCheck={setDeleteReplyCheck}
+                  setDeleteCommentId={setDeleteCommentId}
+                  setDeleteReplyId={setDeleteReplyId}
+                  />
+                ))}
+                
+                {/* replies for desktop Responsive */}
+
+                {comment.replies.map((reply)=>(
+                  <DesktopReplies
+                  key={reply.id} 
+                  reply={reply} 
+                  commentId={comment.id} 
+                  onUpdate={handleReplyUpdate}
+                  setDeleteReplyCheck={setDeleteReplyCheck}
+                  setDeleteCommentId={setDeleteCommentId}
+                  setDeleteReplyId={setDeleteReplyId}
+                  />
+                ))}
+            </div>
+            </div>
           </div>
         ))}
+
         
         {deleteCheck ? 
           <Delete 
@@ -182,14 +219,16 @@ function App() {
           : 
           <div className=' hidden'></div>
         }
-        
 
-          <div className=' w-[344px] h-[182px] flex flex-col bg-[#FFFFFF] items-center justify-center'>
+          <div className=' w-[344px] h-[182px] lg:w-[730px] lg:h-[144px]
+          flex flex-col lg:flex-row  bg-[#FFFFFF] items-center justify-between p-4'>
+            <img src={imageJuiliusomo} alt="img" className='w-[34px] h-[34px]' />
             <textarea
              placeholder='Add a comment...' 
               onChange={(e) => setNewComment(e.target.value)} 
               value={newComment} 
-              className=' w-[310px] h-[96px] border-solid-[#E9EBF0] border-[1px]'
+              className=' w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
+              border-solid-[#E9EBF0] border-[1px]'
               />
 
             <button 
