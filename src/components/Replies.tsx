@@ -55,7 +55,7 @@ export const Replies = ({
 
                 {edit ?
                     <>
-                        <textarea rows={4} cols={50}
+                        <textarea className=' resize-none' rows={4} cols={50}
                         value={replyText} 
                         onChange={(e)=>setReplyText(e.target.value)}
                          >{reply.content}</textarea>

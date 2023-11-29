@@ -228,7 +228,7 @@ function App() {
              placeholder='Add a comment...' 
               onChange={(e) => setNewComment(e.target.value)} 
               value={newComment} 
-              className=' w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
+              className=' resize-none w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
               border-solid-[#E9EBF0] border-[1px]'
               />
 
@@ -239,13 +239,13 @@ function App() {
           </div>
 
           {/* add new comment section for mobile responsive */}
-          <div className='flex lg:hidden w-[344px] h-[190px]
+          <div className=' flex lg:hidden w-[344px] h-[190px]
           flex-col  bg-[#FFFFFF] items-center justify-between p-4'>
             <textarea
              placeholder='Add a comment...' 
               onChange={(e) => setNewComment(e.target.value)} 
               value={newComment} 
-              className=' w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
+              className=' resize-none w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
               border-solid-[#E9EBF0] border-[1px]'
               />
 

@@ -74,7 +74,7 @@ export const Comment: React.FC<CommentProps> = ({
             </div>
             {edit ? 
             <>
-              <textarea rows={4} cols={50} 
+              <textarea className=' resize-none' rows={4} cols={50} 
               value={textAfterEdit}
               onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
               

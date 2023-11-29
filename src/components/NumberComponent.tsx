@@ -6,11 +6,15 @@ export const NumberComponent = () => {
     const handleIncrement = () =>{
       if(startingNumber === 5)
         setStarringNumber(startingNumber + 1)
+      if(startingNumber < 5)
+        setStarringNumber(startingNumber + 1)
     }
 
     const handleDecrement = () =>{
         if(startingNumber === 5 )
            setStarringNumber(startingNumber - 1)  
+        if(startingNumber > 5)
+          setStarringNumber(startingNumber - 1)
     }
 
   return (

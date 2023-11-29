@@ -70,7 +70,7 @@ export const DesktopReplies = ({
                                 <textarea rows={4} cols={50}
                                 value={replyText} 
                                 onChange={(e)=>setReplyText(e.target.value)}
-                                className=' w-[400px] border-[2px] border-[black]'
+                                className=' w-[400px] border-[2px] border-[black] resize-none'
                                 >{reply.content}</textarea>
                                 
                                 <button className=' w-[104px] h-[48px] 

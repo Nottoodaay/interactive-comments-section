@@ -92,7 +92,7 @@ export const DesktopComment: React.FC<CommentProps> = ({
               {edit ? 
                 <div className='flex flex-row gap-4'>
                   <textarea rows={4} cols={50}
-                  className=' w-[530px] border-2 border-[black]' 
+                  className=' w-[530px] border-2 border-[black] resize-none' 
                   value={textAfterEdit}
                   onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
 

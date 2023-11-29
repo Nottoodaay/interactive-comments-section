@@ -18,7 +18,7 @@ export const DesktopReplyTextArea = ({setIsReply, newReply, setNewReply, addNewR
     bg-[#FFFFFF] gap-8 items-center justify-center'>
         <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' />
 
-        <textarea className=' rounded-lg w-[506px] h-[96px] border border-[black]'  
+        <textarea className=' resize-none rounded-lg w-[506px] h-[96px] border border-[black]'  
         cols={50} rows={4}
         value={newReply}
         onChange={(e)=> setNewReply(e.target.value)}
