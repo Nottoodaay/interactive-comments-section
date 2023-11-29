@@ -138,9 +138,9 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative pt-[8px] pb-[8px]'>
+      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative pb-[8px]'>
         {comments.map((comment) => (
-          <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
+          <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] mt-2'>
             <Comment 
             comment={comment} 
             newComment={newReplyToAdd}
