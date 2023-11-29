@@ -156,7 +156,7 @@ function App() {
 
             <DesktopComment
             comment={comment}
-            newComment={newComment}
+            newComment={newReplyToAdd}
             addNewReply={addNewReply}
             setNewReply={setNewReplyToAdd}
             setReplyProperties={setReplyProperties} 

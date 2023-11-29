@@ -66,32 +66,18 @@ export const DesktopComment: React.FC<CommentProps> = ({
   
   return (
     comment.user.username === 'juliusomo' ? 
-        <div className='' >
-            <div className='flex gap-4 p-4'>
-            <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
-            <div>{comment.user.username}</div>
-            <div>{comment.createdAt}</div>
-            </div>
-            {edit ? 
-                <>
-                <textarea rows={4} cols={50} 
-                value={textAfterEdit}
-                onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
-                
-                <button className=' w-[104px] h-[48px] 
-                bg-[#5357B6] items-center 
-                font-medium text-base text-[#ffffff] rounded'
-                onClick={()=>handleUpdate()}
-                >UPDATE</button>
-                </>
-            :  
-                <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
-            }
+        <div className='hidden lg:flex lg:flex-row w-[730px] h-[168px] bg-[#FFFFFF]' >
+            <NumberComponent/>
             
-            <div className=' flex justify-between '>
-              <NumberComponent/>
+            <div>
+            <div className='flex flex-row justify-between p-4'>
               <div className=' flex gap-4'>
-                  <div
+                <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
+                <div>{comment.user.username}</div>
+                <div>{comment.createdAt}</div>
+              </div>
+              <div className=' flex gap-4'>
+                 <div
                     className=' text-[#ED6368] font-medium text-base cursor-pointer'  
                     onClick={()=> handleDelete(comment.id)}
                     >Delete</div>
@@ -100,6 +86,25 @@ export const DesktopComment: React.FC<CommentProps> = ({
                   className=' text-[#5357B6] font-medium text-base cursor-pointer' 
                   >Edit</div>
               </div>
+
+            
+            </div>
+            {edit ? 
+                <div className='flex flex-row gap-4'>
+                <textarea rows={4} cols={50}
+                className=' w-[530px] border-2 border-[black]' 
+                value={textAfterEdit}
+                onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
+                
+                <button className=' w-[104px] h-[48px] 
+                bg-[#5357B6] items-center 
+                font-medium text-base text-[#ffffff] rounded'
+                onClick={()=>handleUpdate()}
+                >UPDATE</button>
+                </div>
+            :  
+                <div className=' text-base w-[530px] text-[#67727E] p-4'>{comment.content}</div>
+            }
             </div>
             
         </div> 
