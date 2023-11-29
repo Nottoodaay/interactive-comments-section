@@ -68,9 +68,9 @@ export const Comment: React.FC<CommentProps> = ({
     comment.user.username === 'juliusomo' ? 
         <div className=' lg:hidden w-[344px] h-[256px]  bg-[#FFFFFF]' >
             <div className=' flex gap-4 p-4'>
-            <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
-            <div>{comment.user.username}</div>
-            <div>{comment.createdAt}</div>
+              <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
+              <div className=' font-bold text-base text-[#334253]'>{comment.user.username}</div>
+              <div className=' font-normal text-base text-[#67727E]'>{comment.createdAt}</div>
             </div>
             {edit ? 
             <>
@@ -110,8 +110,8 @@ export const Comment: React.FC<CommentProps> = ({
               <div className=' flex gap-4 p-4'>
                 <img src={typeof comment.id === 'number' ? images[comment.id] : ''} 
                 className=' w-[32px] h-[32px]' alt="UserImg" />
-                <div>{comment.user.username}</div>
-                <div>{comment.createdAt}</div>
+                <div className=' font-bold text-base text-[#334253]'>{comment.user.username}</div>
+                <div className=' font-normal text-base text-[#67727E]'>{comment.createdAt}</div>
               </div>
                 
                 <div className=' text-base text-[#67727E] p-3'>{comment.content}</div>

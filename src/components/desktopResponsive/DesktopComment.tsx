@@ -73,8 +73,8 @@ export const DesktopComment: React.FC<CommentProps> = ({
             <div className='flex flex-row justify-between p-4'>
               <div className=' flex gap-4'>
                 <img src={imageJuiliusomo} className=' w-[32px] h-[32px]' alt="UserImg" />
-                <div>{comment.user.username}</div>
-                <div>{comment.createdAt}</div>
+                <div className=' font-bold text-base text-[#334253]'>{comment.user.username}</div>
+                <div className=' font-normal text-base text-[#67727E]'>{comment.createdAt}</div>
               </div>
               <div className=' flex gap-4'>
                  <div
@@ -120,8 +120,8 @@ export const DesktopComment: React.FC<CommentProps> = ({
                       <div className=' flex gap-4'>
                           <img src={typeof comment.id === 'number' ? images[comment.id] : ''} 
                               className=' w-[32px] h-[32px]' alt="UserImg" />
-                          <div>{comment.user.username}</div>
-                          <div>{comment.createdAt}</div>
+                          <div  className=' font-bold text-base text-[#334253]'>{comment.user.username}</div>
+                          <div className=' font-normal text-base text-[#67727E]'>{comment.createdAt}</div>
                       </div>
 
                       <div 

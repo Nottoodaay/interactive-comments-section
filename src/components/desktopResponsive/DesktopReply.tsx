@@ -46,13 +46,13 @@ export const DesktopReplies = ({
                         <div className='flex justify-between p-4'> 
                             <div className=' flex gap-4'>
                                 <img src={imageJuiliusomo} alt="userImg" className=' w-[32px] h-[32px]'/>
-                                <div>{reply.user.username}</div>
+                                <div className=' font-bold text-base text-[#334253]'>{reply.user.username}</div>
                                 <div
                                 className=' w-[36px] h-[24px] 
                                 bg-[#5357B6] text-[#FFFFFF]
                                 items-center rounded pl-1
                                 '>you</div>
-                                <div>{reply.createdAt}</div>
+                                <div className=' font-normal text-base text-[#67727E]'>{reply.createdAt}</div>
                             </div>
                             
                             <div className=' flex gap-4'>
@@ -92,8 +92,8 @@ export const DesktopReplies = ({
                     <div>
                         <div className='flex gap-4 p-4'>
                             <img src={imageRamsesmiron} alt="userImg" className=' w-[32px] h-[32px]'/>
-                            <div>{reply.user.username}</div>
-                            <div>{reply.createdAt}</div>
+                            <div className=' font-bold text-base text-[#334253]'>{reply.user.username}</div>
+                            <div className=' font-normal text-base text-[#67727E]'>{reply.createdAt}</div>
                         </div>
                     
                         <div className=' w-[530px]'>{`@${reply.replyingTo} ${reply.content}`}</div>

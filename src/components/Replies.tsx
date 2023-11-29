@@ -42,7 +42,7 @@ export const Replies = ({
                 <div key={reply.id} className=' lg:hidden w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF] p-4' >
                 <div className='flex gap-4'>
                     <img src={imageJuiliusomo} alt="userImg" className=' w-[32px] h-[32px]'/>
-                    <div>{reply.user.username}</div>
+                    <div className=' font-bold text-base text-[#334253]'>{reply.user.username}</div>
                     <div
                      className=' w-[36px] h-[24px] 
                     bg-[#5357B6] text-[#FFFFFF]
@@ -50,7 +50,7 @@ export const Replies = ({
                     '>
                         you
                     </div>
-                    <div>{reply.createdAt}</div>
+                    <div className=' font-normal text-base text-[#67727E]'>{reply.createdAt}</div>
                 </div>
 
                 {edit ?
@@ -83,8 +83,8 @@ export const Replies = ({
                 <div key={reply.id} className=' lg:hidden w-[344px] h-[256px] flex flex-col ml-6 bg-[#FFFFFF]' >
                 <div className='flex gap-4 p-4'>
                     <img src={imageRamsesmiron} alt="userImg" className=' w-[32px] h-[32px]'/>
-                    <div>{reply.user.username}</div>
-                    <div>{reply.createdAt}</div>
+                    <div className=' font-bold text-base text-[#334253]'>{reply.user.username}</div>
+                    <div className=' font-normal text-base text-[#67727E]'>{reply.createdAt}</div>
                 </div>
                 
                 <div className=' p-4'>{`@${reply.replyingTo} ${reply.content}`}</div>
