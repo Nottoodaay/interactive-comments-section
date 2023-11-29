@@ -89,28 +89,12 @@ export const DesktopComment: React.FC<CommentProps> = ({
 
             
             </div>
-            {edit ? 
-                <div className='flex flex-row gap-4'>
-                <textarea rows={4} cols={50}
-                className=' w-[530px] border-2 border-[black]' 
-                value={textAfterEdit}
-                onChange={(e)=>setTextAfterEdit(e.target.value)}>{comment.content}</textarea>
-                
-                <button className=' w-[104px] h-[48px] 
-                bg-[#5357B6] items-center 
-                font-medium text-base text-[#ffffff] rounded'
-                onClick={()=>handleUpdate()}
-                >UPDATE</button>
-                </div>
-            :  
                 <div className=' text-base w-[530px] text-[#67727E] p-4'>{comment.content}</div>
-            }
             </div>
             
         </div> 
        : 
-       <div className='hidden lg:flex flex-col gap-4 items-center'>
-
+       <div className='hidden lg:flex flex-col gap-4 items-center '>
             <div className=' hidden lg:flex lg:flex-row w-[730px] h-[168px] bg-[#FFFFFF]'>
                 <NumberComponent/>
 

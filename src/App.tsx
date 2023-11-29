@@ -138,7 +138,7 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative pt-[64px] pb-[64px]'>
+      <div className='flex flex-col gap-[16px] items-center bg-[#F5F6FA] relative pt-[8px] pb-[8px]'>
         {comments.map((comment) => (
           <div key={comment.id} className='flex flex-col gap-[16px] items-center bg-[#F5F6FA]'>
             <Comment 
@@ -220,8 +220,9 @@ function App() {
           <div className=' hidden'></div>
         }
 
-          <div className=' w-[344px] h-[182px] lg:w-[730px] lg:h-[144px]
-          flex flex-col lg:flex-row  bg-[#FFFFFF] items-center justify-between p-4'>
+        {/* add new text section for desktop responsive */}
+          <div className='hidden lg:flex lg:w-[730px] lg:h-[144px]
+          flex-row  bg-[#FFFFFF] items-center justify-between p-4'>
             <img src={imageJuiliusomo} alt="img" className='w-[34px] h-[34px]' />
             <textarea
              placeholder='Add a comment...' 
@@ -235,6 +236,26 @@ function App() {
             onClick={addNewComment}
             className=' w-[104px] h-[48px] bg-[#5357B6] rounded text-base font-medium text-[#FFFFFF]'
             >Send</button>
+          </div>
+
+          {/* add new comment section for mobile responsive */}
+          <div className='flex lg:hidden w-[344px] h-[190px]
+          flex-col  bg-[#FFFFFF] items-center justify-between p-4'>
+            <textarea
+             placeholder='Add a comment...' 
+              onChange={(e) => setNewComment(e.target.value)} 
+              value={newComment} 
+              className=' w-[310px] h-[96px] lg:w-[500px] lg:h-[96px]
+              border-solid-[#E9EBF0] border-[1px]'
+              />
+
+              <div className='flex gap-24'>
+                <img src={imageJuiliusomo} alt="img" className='w-[34px] h-[34px]' />
+                <button 
+                onClick={addNewComment}
+                className=' w-[104px] h-[48px] bg-[#5357B6] rounded text-base font-medium text-[#FFFFFF]'
+                >Send</button>
+              </div>
           </div>
       </div>
     </>

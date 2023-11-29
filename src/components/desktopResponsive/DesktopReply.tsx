@@ -66,11 +66,11 @@ export const DesktopReplies = ({
                         </div>
                         
                         {edit ?
-                            <div>
+                            <div className=' flex gap-8'>
                                 <textarea rows={4} cols={50}
                                 value={replyText} 
                                 onChange={(e)=>setReplyText(e.target.value)}
-                                className=' w-[530px]'
+                                className=' w-[400px] border-[2px] border-[black]'
                                 >{reply.content}</textarea>
                                 
                                 <button className=' w-[104px] h-[48px] 

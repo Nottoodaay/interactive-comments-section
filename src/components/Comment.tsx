@@ -86,7 +86,7 @@ export const Comment: React.FC<CommentProps> = ({
             </>
 
             :  
-            <div className=' text-base text-[#67727E] p-4'>{comment.content}</div>
+            <div className=' text-base h-[120px] text-[#67727E] p-4'>{comment.content}</div>
             }
             
             <div className=' flex justify-between ml-4 mr-4'>

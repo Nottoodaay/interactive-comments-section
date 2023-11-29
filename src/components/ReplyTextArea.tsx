@@ -14,7 +14,7 @@ export const ReplyTextArea = ({setIsReply, newReply, setNewReply, addNewReply}:R
     }
   return (
     <div className=' w-[344px]
-     h-[256px] flex flex-col
+     h-[256px] flex flex-col mt-[16px]
     bg-[#FFFFFF] gap-8 items-center justify-center'>
         <textarea className=' rounded-lg w-[310px] h-[96px] border border-[black]'  
         cols={50} rows={4}

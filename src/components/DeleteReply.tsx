@@ -22,10 +22,13 @@ export const DeleteReply = ({
         setDeleteReplyId('')
     }
   return (
-    <div className=" 
-    absolute z-40 top-1/4 
-    w-[344px] h-[224px] bg-[#FFFFFF] rounded flex flex-col p-4 gap-4"
-     >
+    <div className=" fixed w-[100vw] h-[100vh] 
+    bg-[#000000] bg-opacity-[0.5] flex
+    items-center justify-center">
+    <div className=" w-[344px] h-[224px]
+     bg-[#FFFFFF] rounded flex flex-col 
+     p-4 gap-4">
+        
         <h2 className=" font-medium text-xl text-[#334253]">Delete Comment</h2>
         <p className=" w-[288px]">
             Are you sure you want to delete this comment? 
@@ -50,6 +53,7 @@ export const DeleteReply = ({
             </button>
         </div>
         
+     </div>
      </div>
   )
 }
